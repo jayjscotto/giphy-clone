@@ -8,7 +8,20 @@
 
 $(document).ready(function() {
 
-    let buttons = [];
+    let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
+
+    function localButtons() {
+        for (let i = 0; i < buttons.length; i++) {
+            let buttonText = buttons[i];
+            let newButton = $("<button>");
+            newButton.attr("class", "btn btn-info gif-button m-2");
+            newButton.attr("data-name", buttons[i]);
+            newButton.text(buttonText);
+
+            $("#button-container").append(newButton);
+        }
+    }
+    localButtons();
 
     //////////
     //push value of input field to buttons array
