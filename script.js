@@ -1,40 +1,46 @@
 //pre-loaded button list
+    //append the following for each gif:
+        //1. STATIC gif
+            //1a. when gif is clicked, it animates
+                //use data-still and data-animate to store each gif's still and animated urls
+                // on click listener to change source attribute
 
-    //input field that user can type in a search
-    //on submit
-        //append new button with that input value to the buttons div
-        //give that button bootstrap classes as necessary
-        //give it a data-name attr
-
-    //on button click
-        //ajax call to giphy api
-        //for 10 gifs that it returns
-            //append the following for each gif:
-                //1. STATIC gif
-                    //1a. when gif is clicked, it animates
-                        //use data-still and data-animate to store each gif's still and animated urls
-                        // on click listener to change source attribute
-                //2. Title
-                //3. Tags
-                //4. Rating.
 
 $(document).ready(function() {
 
-    //when submit is clicked
-    //a button is created with the value of the submitted input
-    $("#submit").on("click", function(){
-        event.preventDefault();
+    let buttons = [];
 
+    //////////
+    //push value of input field to buttons array
+    // addNewButton function
+    // for each item in buttons
+    // create new buttons
+    // call function every time submit is clicked??
+    //////////////////////
+
+    /////////////////////
+    //a button is created with the value of the submitted input
+    function createNewButton() {
+        
+        //text for the new button is equal to the input field's value (whatever the user types)
         let buttonText = $("#add-new-button").val();
 
+        //setting content and attributes for the new button
         let newButton = $("<button>");
         newButton.attr("class", "btn btn-info gif-button m-2");
         newButton.attr("data-name", $("#add-new-button").val())
         newButton.text(buttonText);
 
+        buttons.push(newButton);
+
         //button is appended to the button container
         $("#button-container").append(newButton);
-
+    }
+    //when submit is clicked
+    
+    $("#submit").on("click", function(){
+        event.preventDefault();
+        createNewButton();
         //clear the input field after the button has been appended
         $("#add-new-button").val("");
     });
@@ -53,22 +59,34 @@ $(document).ready(function() {
             for (let i = 0; i <= 10; i++) {
                 //individual gif container
                 let gifDiv = $("<div>");
-                gifDiv.attr("class", "col-3 border border-rounded");
+                gifDiv.attr("class", "col-3 mx-auto");
 
                 //actual gif image
                 let newGif = $("<img>");
                 newGif.attr("src", response.data[i].images.fixed_width.url);
-                newGif.attr("class", "mx-auto");
+                newGif.attr("class", "mx-auto gif");
+
+                let ratingInfo = $("<p>");
+                ratingInfo.text(`Rating: ${response.data[i].rating}`);
                 
+                let gifTitle = $("<p>");
+                gifTitle.text(`Title: ${response.data[i].title}`);
+
                 //appending gif image and info to individual gif container
-                gifDiv.append(newGif);
+                gifDiv.append(newGif, gifTitle, ratingInfo);
                 $("#gif-container").append(gifDiv);
+
             }
         })
     })
 
 
+    $(document).on("click", ".gif", function(){
+        //set up to pause and play gifs.....
+        
+        
 
+    })
     
 
 
