@@ -8,7 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 
 <title>Jason Scotto Giphy Clone</title>
 </head>    
@@ -29,8 +32,8 @@
                 <form>
                     <div class="form-group text-left mt-2">
                         <label class="h5" for="add-new-button">Add a new button!</label>
-                        <input type="text" class="form-control mb-3" id="add-new-button" aria-describedby="new-button" placeholder="New Gif Button">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <input type="text" id="add-new-button" class="form-control mb-3" placeholder="New Gif Button">
+                        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -39,17 +42,16 @@
                 <!-- Buttons dynamically appended here -->
             </div>
         </div>
-        <div class="row">
-            <div id="gif-container" class="col-12 border border-danger">
+        <div id="gif-container" class="row my-5">
                 <!-- gifs dynamically appended here -->
                 
-            </div>
         </div>
     </div>
 
 
     </div>
 
+<script src="script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
