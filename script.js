@@ -10,45 +10,26 @@ $(document).ready(function() {
 
     let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
 
-    function localButtons() {
+    function renderButtons() {
+        //empty button container
+        $("#button-container").empty();
+
+        //create buttons for every item in buttons array
         for (let i = 0; i < buttons.length; i++) {
+            
             let buttonText = buttons[i];
+
             let newButton = $("<button>");
-            newButton.attr("class", "btn btn-info gif-button m-2");
+            newButton.attr("class", "btn btn-info button m-2");
             newButton.attr("data-name", buttons[i]);
             newButton.text(buttonText);
 
             $("#button-container").append(newButton);
         }
     }
-    localButtons();
+    renderButtons();
 
-    //////////
-    //push value of input field to buttons array
-    // addNewButton function
-    // for each item in buttons
-    // create new buttons
-    // call function every time submit is clicked??
-    //////////////////////
 
-    /////////////////////
-    //a button is created with the value of the submitted input
-    function createNewButton() {
-        
-        //text for the new button is equal to the input field's value (whatever the user types)
-        let buttonText = $("#add-new-button").val();
-
-        //setting content and attributes for the new button
-        let newButton = $("<button>");
-        newButton.attr("class", "btn btn-info gif-button m-2");
-        newButton.attr("data-name", $("#add-new-button").val())
-        newButton.text(buttonText);
-
-        buttons.push(newButton);
-
-        //button is appended to the button container
-        $("#button-container").append(newButton);
-    }
 
 
     //when submit is clicked
@@ -56,12 +37,17 @@ $(document).ready(function() {
     $("#submit").on("click", function(){
         event.preventDefault();
 
-        createNewButton();
+        //add input value to buttons array
+        buttons.push($("#add-new-button").val());
+
+        //render buttons function call to ensure the new button added is rendered to the div
+        renderButtons();
+
         //clear the input field after the button has been appended
         $("#add-new-button").val("");
     });
 
-    $(document).on("click", ".gif-button", function(){
+    $(document).on("click", ".button", function(){
         const apiKey = "7xcMQFVtRXWFvzwDuLfsYyabvpQjkV1C";
         const buttonTitle = $(this).attr('data-name');
         const queryUrl = `https://api.giphy.com/v1/gifs/search?apikey=${apiKey}&limit=10&q=${buttonTitle}`;
@@ -77,7 +63,7 @@ $(document).ready(function() {
                 let gifDiv = $("<div>");
                 gifDiv.attr("class", "col-3 mx-auto");
 
-                //actual gif image
+                //actual gif image and attributes
                 let newGif = $("<img>");
                 newGif.attr("src", response.data[i].images.fixed_width.url);
                 newGif.attr("data-state", "animate");
@@ -85,9 +71,9 @@ $(document).ready(function() {
                 newGif.attr("data-still",  response.data[i].images.fixed_width_still.url);
                 newGif.attr("class", "mx-auto gif");
 
+                //ratings and title
                 let ratingInfo = $("<p>");
                 ratingInfo.text(`Rating: ${response.data[i].rating}`);
-                
                 let gifTitle = $("<p>");
                 gifTitle.text(response.data[i].title);
 
@@ -111,8 +97,6 @@ $(document).ready(function() {
             $(this).attr("src", $(this).attr("data-animate"));
             $(this).attr("data-state", "animate");
           }
-        
-
     })
     
 
