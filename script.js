@@ -5,6 +5,7 @@ $(document).ready(function() {
     let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
     // localStorage.setItem("buttons", buttons);
 
+
     function renderButtons() {
         //empty button container
         $("#button-container").empty();
@@ -27,7 +28,8 @@ $(document).ready(function() {
             $("#button-container").append(newButton);
         }
     }
-
+    renderButtons();
+    
        //when submit is clicked
     //create a new button and clear the input field
     $("#submit").on("click", function(){
@@ -45,7 +47,7 @@ $(document).ready(function() {
         $("#add-new-button").val("");
     });
 
-   renderButtons();
+   
 
  
 
@@ -103,6 +105,7 @@ $(document).ready(function() {
           }
     })
     
+
 
 
 })
