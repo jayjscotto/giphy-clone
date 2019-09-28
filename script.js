@@ -49,10 +49,13 @@ $(document).ready(function() {
         //button is appended to the button container
         $("#button-container").append(newButton);
     }
+
+
     //when submit is clicked
-    
+    //create a new button and clear the input field
     $("#submit").on("click", function(){
         event.preventDefault();
+
         createNewButton();
         //clear the input field after the button has been appended
         $("#add-new-button").val("");
@@ -77,13 +80,16 @@ $(document).ready(function() {
                 //actual gif image
                 let newGif = $("<img>");
                 newGif.attr("src", response.data[i].images.fixed_width.url);
+                newGif.attr("data-state", "animate");
+                newGif.attr("data-animate", response.data[i].images.fixed_width.url);
+                newGif.attr("data-still",  response.data[i].images.fixed_width_still.url);
                 newGif.attr("class", "mx-auto gif");
 
                 let ratingInfo = $("<p>");
                 ratingInfo.text(`Rating: ${response.data[i].rating}`);
                 
                 let gifTitle = $("<p>");
-                gifTitle.text(`Title: ${response.data[i].title}`);
+                gifTitle.text(response.data[i].title);
 
                 //appending gif image and info to individual gif container
                 gifDiv.append(newGif, gifTitle, ratingInfo);
@@ -95,8 +101,16 @@ $(document).ready(function() {
 
 
     $(document).on("click", ".gif", function(){
+        let imageState = $(this).attr("data-state");
+        console.log(imageState);
         //set up to pause and play gifs.....
-        
+        if (imageState === "animate") {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+          } else {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+          }
         
 
     })
