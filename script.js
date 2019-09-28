@@ -1,38 +1,34 @@
-//pre-loaded button list
-    //append the following for each gif:
-        //1. STATIC gif
-            //1a. when gif is clicked, it animates
-                //use data-still and data-animate to store each gif's still and animated urls
-                // on click listener to change source attribute
-
 
 $(document).ready(function() {
 
+    //premade list of buttons
     let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
+    // localStorage.setItem("buttons", buttons);
 
     function renderButtons() {
         //empty button container
         $("#button-container").empty();
 
+        //get button list from localStorage
+        let buttons = localStorage.getItem("buttons").split(",");
+
         //create buttons for every item in buttons array
         for (let i = 0; i < buttons.length; i++) {
-            
+
             let buttonText = buttons[i];
 
+            //button attributes
             let newButton = $("<button>");
             newButton.attr("class", "btn btn-info button m-2");
             newButton.attr("data-name", buttons[i]);
             newButton.text(buttonText);
 
+            //append button to 
             $("#button-container").append(newButton);
         }
     }
-    renderButtons();
 
-
-
-
-    //when submit is clicked
+       //when submit is clicked
     //create a new button and clear the input field
     $("#submit").on("click", function(){
         event.preventDefault();
@@ -40,12 +36,18 @@ $(document).ready(function() {
         //add input value to buttons array
         buttons.push($("#add-new-button").val());
 
+        localStorage.setItem("buttons", buttons);
+        
         //render buttons function call to ensure the new button added is rendered to the div
         renderButtons();
 
         //clear the input field after the button has been appended
         $("#add-new-button").val("");
     });
+
+   renderButtons();
+
+ 
 
     $(document).on("click", ".button", function(){
         const apiKey = "7xcMQFVtRXWFvzwDuLfsYyabvpQjkV1C";
@@ -88,8 +90,10 @@ $(document).ready(function() {
 
     $(document).on("click", ".gif", function(){
         let imageState = $(this).attr("data-state");
+
         console.log(imageState);
-        //set up to pause and play gifs.....
+
+        //changes image url between still and animated conditionally based on the data-state attribute of the image
         if (imageState === "animate") {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-state", "still");
