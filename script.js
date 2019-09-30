@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     //premade list of buttons
     let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
-    // localStorage.setItem("buttons", buttons);
 
 
     function renderButtons() {
