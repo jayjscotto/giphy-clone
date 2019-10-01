@@ -1,13 +1,13 @@
 
 $(document).ready(function() {
     //list of premade buttons
-    let buttons = localStorage.getItem("buttons").split(",");
+    let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
 
     //state for buttons, if null, declare array and then execute renderButtons function
-    if(buttons){
+    if (localStorage.getItem("buttons")){
+        let buttons = localStorage.getItem("buttons").split(",");
         renderButtons();
     } else {
-        let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
         renderButtons();
     }
     
@@ -19,12 +19,13 @@ $(document).ready(function() {
         //push in new button
         if (nextButton) {
             buttons.push(nextButton);
+            localStorage.setItem("buttons", buttons);
         }
-
         //set local storage
-        localStorage.setItem("buttons", buttons);
+        
         //get button list from localStorage
         let gifButtons = localStorage.getItem("buttons").split(",");
+        
 
         //create buttons for every item in buttons array
         for (let i = 0; i < gifButtons.length; i++) {
