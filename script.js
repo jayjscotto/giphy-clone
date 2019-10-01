@@ -18,6 +18,7 @@ $(document).ready(function() {
 
         //push in new button
         if (nextButton) {
+            let buttons = localStorage.getItem("buttons").split(",");
             buttons.push(nextButton);
             localStorage.setItem("buttons", buttons);
         }
