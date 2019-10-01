@@ -2,11 +2,11 @@
 $(document).ready(function() {
     //list of premade buttons
     let buttons = localStorage.getItem("buttons").split(",");
-    
+
     //state for buttons, if null, declare array and then execute renderButtons function
     if(buttons){
         renderButtons();
-    }else{
+    } else {
         let buttons = ["Dogs", "Puppies", "The Office", "The Sopranos", "The Office", "Peaky Blinders"];
         renderButtons();
     }
