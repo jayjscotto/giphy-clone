@@ -8,6 +8,7 @@ $(document).ready(function() {
         let buttons = localStorage.getItem("buttons").split(",");
         renderButtons();
     } else {
+        localStorage.setItem("buttons", buttons);
         renderButtons();
     }
     
